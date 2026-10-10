@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body>
+<title>Reto Strenx® 700</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: una tarjeta de reto por pantalla, como una ficha de taller. 20 preguntas en 4 niveles; la barra de 20 segmentos registra aciertos. Colores de temperatura del acero (gris, paja, bronce, azul de revenido). */
+:root{
+  --bg:#EDF0F2; --panel:#FFFFFF; --ink:#17202A; --muted:#56626E; --line:#CDD4DA;
+  --steel:#8794A0; --straw:#C99A2E; --bronze:#AD5F25; --blue:#3C6CA3; --accent:#AD5F25;
+  --ok:#2E7B53; --bad:#B03A2E;
+  --f-display:'Barlow Condensed','Arial Narrow',Arial,sans-serif;
+  --f-body:'IBM Plex Sans',-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11171D; --panel:#1A222A; --ink:#E7ECF0; --muted:#9AA7B3; --line:#2E3A45;
+  --steel:#6E7C89; --straw:#E0B04E; --bronze:#D58548; --blue:#6E9BD0; --accent:#D58548;
+  --ok:#5CBB87; --bad:#E2695B; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#11171D; --panel:#1A222A; --ink:#E7ECF0; --muted:#9AA7B3; --line:#2E3A45;
+  --steel:#6E7C89; --straw:#E0B04E; --bronze:#D58548; --blue:#6E9BD0; --accent:#D58548;
+  --ok:#5CBB87; --bad:#E2695B; color-scheme:dark }
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);margin:0}
+.app{max-width:720px;margin:0 auto;padding-inline:16px;padding-block:22px 40px;display:grid;gap:16px}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.brand{font:600 12px var(--f-mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--accent)}
+.count{font:500 13px var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.segs{display:grid;grid-template-columns:repeat(20,1fr);gap:3px}
+.segs i{height:6px;border-radius:2px;background:var(--line)}
+.segs i.ok{background:var(--ok)} .segs i.bad{background:var(--bad)} .segs i.now{background:var(--ink)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:26px 22px;display:grid;gap:14px;min-height:360px;align-content:start}
+.lvl{font:600 12px var(--f-mono);letter-spacing:1.4px;text-transform:uppercase;display:flex;gap:10px;align-items:center}
+.lvl b{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c,var(--steel))}
+h1,h2{font-family:var(--f-display);margin:0;line-height:1.08;text-wrap:balance}
+h1{font-size:clamp(36px,8vw,56px)}
+h2{font-size:clamp(23px,4.6vw,30px);font-weight:600}
+.ctx{font-size:14.5px;color:var(--muted);border-left:3px solid var(--line);padding-left:12px;margin:0}
+.opts{display:grid;gap:9px}
+.opt{all:unset;cursor:pointer;border:1.5px solid var(--line);border-radius:6px;padding:13px 16px;font-size:15.5px;display:flex;gap:12px;align-items:flex-start}
+.opt span.k{font:600 13px var(--f-mono);color:var(--muted);min-width:16px}
+.opt:hover:not([aria-disabled="true"]){border-color:var(--accent)}
+.opt:focus-visible,.btn:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,transparent)}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 10%,transparent)}
+.opt[aria-disabled="true"]{cursor:default}
+.fb{border-radius:6px;padding:12px 14px;font-size:14.5px;display:grid;gap:4px;background:color-mix(in srgb,var(--ink) 5%,transparent)}
+.fb strong{font:600 13px var(--f-mono);letter-spacing:1px;text-transform:uppercase}
+.fb.ok strong{color:var(--ok)} .fb.bad strong{color:var(--bad)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.btn{all:unset;cursor:pointer;background:var(--ink);color:var(--bg);font-weight:600;font-size:15px;padding:12px 20px;border-radius:6px;text-align:center}
+.btn.sec{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn[aria-disabled="true"]{opacity:.35;cursor:not-allowed}
+.streak{font:500 13px var(--f-mono);color:var(--muted)}
+.lede{color:var(--muted);margin:0;max-width:60ch}
+.blocks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (max-width:480px){.blocks{grid-template-columns:1fr}}
+.blk{border:1px solid var(--line);border-radius:6px;padding:10px 12px;display:grid;gap:2px}
+.blk span{font-size:13px;color:var(--muted)} .blk b{font:600 20px var(--f-mono)}
+.score{font:600 clamp(64px,16vw,96px)/1 var(--f-mono);font-variant-numeric:tabular-nums}
+.score small{font-size:.35em;color:var(--muted)}
+.badge{font-family:var(--f-display);font-size:28px;font-weight:700;color:var(--accent)}
+label.f{display:grid;gap:6px;font:500 12px var(--f-mono);letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+input[type=text]{font:16px var(--f-body);padding:11px 12px;border:1.5px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+.share{font:14px var(--f-mono);background:var(--bg);border:1px dashed var(--line);border-radius:6px;padding:12px;white-space:pre-wrap}
+.miss{display:grid;gap:8px;font-size:14px}
+.miss div{border-left:3px solid var(--bad);padding:4px 10px}
+footer{font-size:12px;color:var(--muted);display:grid;gap:3px}
+@media (prefers-reduced-motion:no-preference){.card{animation:in .25s ease}@keyframes in{from{transform:translateY(6px);opacity:.6}to{transform:none;opacity:1}}}
+</style>
+
+<main class="app">
+  <div class="top"><span class="brand">Reto técnico · Soldadura de Strenx® 700</span><span class="count" id="count"></span></div>
+  <div class="segs" id="segs" aria-hidden="true"></div>
+  <div id="view"></div>
+  <footer>
+    <span>Preguntas basadas en la ficha técnica Strenx® 700 E/F y en la guía de soldadura de Strenx® (2022). Ante un caso real, confirme con WeldCalc™ o con el soporte técnico del fabricante.</span>
+    <span>Strenx® y Hardox® son marcas registradas de SSAB. · César Gonzales · Soldando ideas y soluciones juntos</span>
+  </footer>
+</main>
+
+<script>
+// Para recibir los resultados: cree un Google Form y pegue aquí el enlace de respuesta precargada
+// con los textos NOMBRE, EMPRESA y PUNTAJE en los campos. Mientras esté vacío, el botón no aparece.
+const FORM_URL = "";
+
+const L=[{n:'Nivel 1 · El material',c:'var(--steel)'},{n:'Nivel 2 · Precalentamiento',c:'var(--straw)'},{n:'Nivel 3 · Aporte de calor y temperatura',c:'var(--bronze)'},{n:'Nivel 4 · Práctica de taller',c:'var(--blue)'}];
+const Q=[
+ // Nivel 1
+ {l:0,q:'¿Qué tipo de acero es Strenx® 700?',o:['Acero antidesgaste de alta dureza','Acero estructural de alta resistencia','Acero inoxidable para corrosión'],c:1,e:'Strenx® 700 es un acero estructural: su fuerte es soportar cargas con menos espesor. La resistencia al desgaste es el terreno de Hardox®.'},
+ {l:0,q:'Chapa de 30 mm. ¿Cuál es su límite elástico mínimo?',o:['650 MPa','700 MPa','780 MPa'],c:1,e:'De 4 a 53 mm el límite elástico mínimo es 700 MPa. 780 MPa es el piso de la resistencia a la tracción, no del límite elástico.'},
+ {l:0,q:'Y una chapa de 80 mm, ¿qué límite elástico mínimo garantiza?',o:['700 MPa','650 MPa','600 MPa'],c:1,e:'Sobre 53 mm el mínimo baja a 650 MPa. Por eso conviene revisar la ficha según el espesor real.'},
+ {l:0,q:'La calidad Strenx® 700 F se elige cuando el equipo trabaja en frío extremo. ¿A qué temperatura garantiza su ensayo Charpy?',o:['−20 °C','−40 °C','−60 °C'],c:2,e:'700 F garantiza 27 J a −60 °C. La calidad E garantiza 69 J a −40 °C.'},
+ {l:0,q:'¿Sobre qué temperatura Strenx® 700 deja de conservar sus propiedades de fábrica?',o:['300 °C','580 °C','900 °C'],c:1,e:'Es un acero templado y revenido: sobre 580 °C sus propiedades de entrega no se conservan. Cuide el calor en enderezados y reparaciones.'},
+ // Nivel 2
+ {l:1,ctx:'Taller a 22 °C, unión normal, aporte de calor de 1,7 kJ/mm o más.',q:'Unión de chapas de 20 mm de Strenx® 700 E. ¿Precalentamiento mínimo?',o:['No requiere','75 °C','100 °C'],c:0,e:'Hasta 30 mm la tabla de la guía no exige precalentamiento si la unión y el ambiente están a 5 °C o más.'},
+ {l:1,ctx:'Mismas condiciones de taller.',q:'Ahora la chapa más gruesa de la unión es de 40 mm. ¿Precalentamiento mínimo?',o:['No requiere','75 °C','100 °C'],c:1,e:'Entre 30 y unos 45 mm la tabla pide 75 °C para Strenx® 700 E.'},
+ {l:1,ctx:'Mismas condiciones de taller.',q:'Chapa de 60 mm. ¿Precalentamiento mínimo?',o:['75 °C','100 °C','150 °C'],c:1,e:'Desde unos 45 mm y hasta 160 mm, la tabla pide 100 °C.'},
+ {l:1,ctx:'Trabajo en campo, de madrugada, con 2 °C de ambiente.',q:'Chapa de 25 mm, que en taller no necesitaría precalentamiento. ¿Qué hace?',o:['Nada, el espesor manda','Precalentar la unión al menos a 60 °C','Precalentar a 150 °C por seguridad'],c:1,e:'Con el aire bajo 5 °C, la guía pide precalentar la unión al menos a 60 °C. Pasarse de temperatura tampoco es gratis.'},
+ {l:1,ctx:'Chapa de 40 mm (tabla: 75 °C). La pieza está fijada rígidamente a una estructura.',q:'¿Qué precalentamiento mínimo corresponde?',o:['75 °C','100 °C','125 °C'],c:1,e:'Una unión muy embridada suma 25 °C a la tabla: 75 + 25 = 100 °C. Si se juntan dos condiciones de este tipo, la guía pide consultar al fabricante.'},
+ // Nivel 3
+ {l:2,ctx:'Unión en T: alma de 12 mm soldada a un ala de 40 mm.',q:'¿Qué chapa define el aporte de calor máximo?',o:['La de 40 mm','La de 12 mm','El promedio de ambas'],c:1,e:'El aporte de calor se limita por la chapa más delgada, porque es la que se calienta y enfría más rápido.'},
+ {l:2,ctx:'La misma unión de 12 mm con 40 mm.',q:'¿Y qué chapa define el precalentamiento?',o:['La de 40 mm','La de 12 mm','Ninguna, se precalienta solo el alma'],c:0,e:'El precalentamiento lo define la chapa más gruesa de la unión (si es el mismo acero). Las dos reglas van juntas: gruesa para precalentar, delgada para el aporte.'},
+ {l:2,q:'En chapas gruesas de Strenx® 700 E (unos 23 mm o más), soldando al precalentamiento mínimo, ¿cuál es el aporte de calor máximo recomendado?',o:['1,7 kJ/mm','3,5 kJ/mm','5,0 kJ/mm'],c:1,e:'El diagrama de la guía llega a un tope de 3,5 kJ/mm. Con menos espesor el máximo baja.'},
+ {l:2,ctx:'Soldadura de varias pasadas: la unión se mantiene a unos 175 °C.',q:'¿Qué pasa con el aporte de calor máximo?',o:['Sube, porque ya está caliente','Baja: el tope cae a unos 2,8 kJ/mm','No cambia'],c:1,e:'Con la unión más caliente el enfriamiento es más lento, así que la guía reduce el aporte máximo: de 3,5 a unos 2,8 kJ/mm a 175 °C.'},
+ {l:2,q:'¿Cuál es la temperatura máxima entre pasadas recomendada para Strenx® 700 E?',o:['150 °C','300 °C','580 °C'],c:1,e:'300 °C protege las propiedades de toda la estructura soldada. 580 °C es el límite del material, no una temperatura de trabajo.'},
+ // Nivel 4
+ {l:3,q:'Para consumibles no aleados y de baja aleación, ¿cuál es el hidrógeno máximo en el metal depositado?',o:['5 ml/100 g','10 ml/100 g','15 ml/100 g'],c:0,e:'Máximo 5 ml de hidrógeno por cada 100 g de metal de soldadura. Almacenar bien los consumibles es parte del control.'},
+ {l:3,ctx:'Unión de varias pasadas que requiere precalentamiento.',q:'¿Cuál es la técnica que recomienda la guía con los consumibles?',o:['Todo con el consumible más resistente','Puntos y primeras pasadas con menor resistencia; el resto con mayor','Todo con el de menor resistencia, siempre'],c:1,e:'Raíz y puntos con menor resistencia mejoran la tenacidad y la resistencia a la fisura por hidrógeno; el relleno con mayor resistencia da la resistencia de la unión.'},
+ {l:3,q:'¿Cuál es la separación máxima recomendada en la unión?',o:['1 mm','3 mm','6 mm'],c:1,e:'Máximo 3 mm. Más separación significa más metal depositado, más calor y más tensiones.'},
+ {l:3,ctx:'Precalentaste una chapa de 50 mm con calentadores eléctricos.',q:'¿Cómo mides correctamente la temperatura?',o:['En el centro de la junta, apenas apagas el equipo','En la chapa más gruesa, en una franja de 75 + 75 mm alrededor de la junta, esperando unos 4 minutos','En cualquier punto de la pieza'],c:1,e:'La guía pide medir en la chapa más gruesa, en 75 + 75 mm alrededor de la junta, y esperar 2 min por cada 25 mm de espesor: 50 mm son 4 minutos.'},
+ {l:3,ctx:'Unión a tope de chapas de 40 mm.',q:'¿Qué recomienda la guía sobre la forma de la junta?',o:['Junta simétrica, siempre centrada','Junta asimétrica, con el centro de la unión a unos 5 mm del centro del espesor','Da igual la forma'],c:1,e:'Sobre 25 mm la guía recomienda juntas asimétricas: el centro de la chapa gruesa puede concentrar elementos que favorecen la fisura por hidrógeno.'},
+];
+const RANKS=[[18,'Especialista'],[14,'Supervisor de soldadura'],[10,'Soldador calificado'],[0,'Aprendiz']];
+let S={i:-1,ans:Array(Q.length).fill(null),name:'',company:'',streak:0,best:0};
+
+const $=s=>document.querySelector(s);
+function esc(t){return String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function segs(){$('#segs').innerHTML=Q.map((_,k)=>{const a=S.ans[k];return `<i class="${a===null?(k===S.i?'now':''):(a===Q[k].c?'ok':'bad')}"></i>`;}).join('');}
+function score(){return S.ans.filter((a,k)=>a===Q[k].c).length;}
+
+function intro(){
+  $('#count').textContent='20 preguntas · 4 niveles';
+  $('#view').innerHTML=`<div class="card">
+    <h1>¿Cuánto sabes de Strenx® 700?</h1>
+    <p class="lede">20 situaciones reales de taller, de lo básico a lo que solo domina un especialista. Al responder cada una verás la explicación con los datos de la guía. Al final, tu puntaje y tu nivel.</p>
+    <div class="blocks">${L.map((x,k)=>`<div class="blk"><span>Preguntas ${k*5+1}–${k*5+5}</span><b style="font-family:var(--f-body);font-size:15px;color:${x.c}">${x.n.split('· ')[1]}</b></div>`).join('')}</div>
+    <label class="f">Tu nombre (opcional, para tu resultado)<input type="text" id="nm" maxlength="60" autocomplete="name" value="${esc(S.name)}"></label>
+    <label class="f">Empresa (opcional)<input type="text" id="co" maxlength="60" autocomplete="organization" value="${esc(S.company)}"></label>
+    <div class="row"><span class="streak">Toma unos 6 minutos</span><button class="btn" id="go">Empezar el reto</button></div></div>`;
+  $('#go').onclick=()=>{S.name=$('#nm').value.trim();S.company=$('#co').value.trim();S.i=0;show();};
+  segs();
+}
+
+function show(){
+  if(S.i>=Q.length) return result();
+  const x=Q[S.i], a=S.ans[S.i], done=a!==null, lv=L[x.l];
+  $('#count').textContent=`Pregunta ${S.i+1} de ${Q.length}`;
+  $('#view').innerHTML=`<div class="card">
+    <div class="lvl" style="--c:${lv.c}"><b></b>${lv.n}</div>
+    ${x.ctx?`<p class="ctx">${x.ctx}</p>`:''}
+    <h2>${x.q}</h2>
+    <div class="opts">${x.o.map((o,j)=>`<button class="opt ${done&&j===x.c?'right':''} ${done&&j===a&&a!==x.c?'wrong':''}" data-j="${j}" ${done?'aria-disabled="true"':''}><span class="k">${'ABC'[j]}</span><span>${o}</span></button>`).join('')}</div>
+    ${done?`<div class="fb ${a===x.c?'ok':'bad'}"><strong>${a===x.c?'Correcto':'No es correcto'}</strong><span>${x.e}</span></div>`:''}
+    <div class="row"><span class="streak">${S.streak>=3?'Racha: '+S.streak+' seguidas':'Aciertos: '+score()}</span>
+    <div class="row" style="justify-content:flex-end">${S.i>0?'<button class="btn sec" id="bk">Atrás</button>':''}<button class="btn" id="nx" ${done?'':'aria-disabled="true"'}>${S.i===Q.length-1?'Ver mi resultado':'Siguiente'}</button></div></div></div>`;
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{ if(S.ans[S.i]!==null)return; const j=+b.dataset.j; S.ans[S.i]=j;
+      S.streak=j===x.c?S.streak+1:0; S.best=Math.max(S.best,S.streak); show(); });
+  $('#nx').onclick=()=>{ if(S.ans[S.i]===null)return; S.i++; show(); };
+  if($('#bk')) $('#bk').onclick=()=>{S.i--;show();};
+  segs();
+}
+
+function result(){
+  const sc=score(), rk=RANKS.find(r=>sc>=r[0])[1];
+  const by=L.map((_,k)=>Q.map((q,i)=>[q,i]).filter(([q])=>q.l===k).filter(([q,i])=>S.ans[i]===q.c).length);
+  const miss=Q.map((q,i)=>[q,i]).filter(([q,i])=>S.ans[i]!==q.c);
+  const txt=`Obtuve ${sc}/20 en el Reto Strenx® 700${S.name?' ('+S.name+')':''}. Nivel: ${rk}.`;
+  $('#count').textContent='Resultado';
+  $('#view').innerHTML=`<div class="card">
+    <div class="lvl" style="--c:var(--accent)"><b></b>Tu resultado${S.name?' · '+esc(S.name):''}</div>
+    <div class="score">${sc}<small> / 20</small></div>
+    <div class="badge">${rk}</div>
+    <div class="blocks">${L.map((x,k)=>`<div class="blk"><span>${x.n}</span><b>${by[k]} / 5</b></div>`).join('')}</div>
+    <p class="lede">Mejor racha: ${S.best} respuestas seguidas.</p>
+    <span class="streak">Compártelo en los comentarios del post:</span>
+    <div class="share" id="sh">${esc(txt)}</div>
+    <div class="row" style="justify-content:flex-start"><button class="btn" id="cp">Copiar mi resultado</button>${FORM_URL?'<a class="btn sec" id="fm" target="_blank" rel="noopener">Enviar mi resultado</a>':''}<button class="btn sec" id="rs">Intentar de nuevo</button></div>
+    <span class="streak" id="cpok"></span>
+    ${miss.length?`<h2 style="font-size:22px">Para repasar</h2><div class="miss">${miss.map(([q])=>`<div><b>${q.q}</b><br>${q.e}</div>`).join('')}</div>`:'<p class="lede">Respuestas perfectas. Ese es el nivel que hace que cada unión rinda a la altura de Strenx® 700.</p>'}
+  </div>`;
+  $('#cp').onclick=async()=>{try{await navigator.clipboard.writeText(txt);$('#cpok').textContent='Copiado. Pégalo en los comentarios.';}catch(e){const r=document.createRange();r.selectNodeContents($('#sh'));const s=getSelection();s.removeAllRanges();s.addRange(r);$('#cpok').textContent='Texto seleccionado: cópialo con Ctrl+C.';}};
+  if(FORM_URL){$('#fm').href=FORM_URL.replace('NOMBRE',encodeURIComponent(S.name||'Anónimo')).replace('EMPRESA',encodeURIComponent(S.company||'-')).replace('PUNTAJE',encodeURIComponent(sc+'/20 - '+rk));}
+  $('#rs').onclick=()=>{S={i:-1,ans:Array(Q.length).fill(null),name:S.name,company:S.company,streak:0,best:0};intro();};
+  S.i=Q.length; segs();
+}
+intro();
+</script>
+
+</body></html>
