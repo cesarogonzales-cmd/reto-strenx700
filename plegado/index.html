@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Plegado Strenx® 700</title>
+<meta name="description" content="Aprende y ponte a prueba: 10 pantallas sobre el plegado de Strenx® 700, con datos del folleto Bending of Strenx®.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Misma ficha de taller que el Reto Strenx® 700 de soldadura: una tarjeta por pantalla, barra de 10 segmentos. */
+:root{
+  --bg:#EDF0F2; --panel:#FFFFFF; --ink:#17202A; --muted:#56626E; --line:#CDD4DA;
+  --steel:#8794A0; --straw:#C99A2E; --bronze:#AD5F25; --blue:#3C6CA3; --accent:#AD5F25;
+  --ok:#2E7B53; --bad:#B03A2E; --plate:#B8C1C9;
+  --f-display:'Barlow Condensed','Arial Narrow',Arial,sans-serif;
+  --f-body:'IBM Plex Sans',-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11171D; --panel:#1A222A; --ink:#E7ECF0; --muted:#9AA7B3; --line:#2E3A45;
+  --steel:#6E7C89; --straw:#E0B04E; --bronze:#D58548; --blue:#6E9BD0; --accent:#D58548;
+  --ok:#5CBB87; --bad:#E2695B; --plate:#4A5866; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#11171D; --panel:#1A222A; --ink:#E7ECF0; --muted:#9AA7B3; --line:#2E3A45;
+  --steel:#6E7C89; --straw:#E0B04E; --bronze:#D58548; --blue:#6E9BD0; --accent:#D58548;
+  --ok:#5CBB87; --bad:#E2695B; --plate:#4A5866; color-scheme:dark }
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);margin:0}
+.app{max-width:720px;margin:0 auto;padding-inline:16px;padding-block:22px 40px;display:grid;gap:16px}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.brand{font:600 12px var(--f-mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--accent)}
+.count{font:500 13px var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.segs{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}
+.segs i{height:6px;border-radius:2px;background:var(--line)}
+.segs i.ok{background:var(--ok)} .segs i.bad{background:var(--bad)} .segs i.now{background:var(--ink)} .segs i.seen{background:var(--steel)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:26px 22px;display:grid;gap:14px;min-height:360px;align-content:start}
+.lvl{font:600 12px var(--f-mono);letter-spacing:1.4px;text-transform:uppercase;display:flex;gap:10px;align-items:center;color:var(--muted)}
+.lvl b{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c,var(--steel))}
+h1,h2,h3{font-family:var(--f-display);margin:0;line-height:1.08;text-wrap:balance}
+h1{font-size:clamp(36px,8vw,56px)}
+h2{font-size:clamp(25px,5vw,32px);font-weight:600}
+h3{font-size:clamp(21px,4.2vw,25px);font-weight:600}
+p{margin:0}
+.lede{color:var(--muted);max-width:62ch}
+.learn{display:grid;gap:8px;margin:0;padding-left:20px}
+.learn li{padding-left:2px}
+.learn b{font-weight:600}
+.ctx{font-size:14.5px;color:var(--muted);border-left:3px solid var(--line);padding-left:12px}
+.sep{height:1px;background:var(--line);margin:4px 0}
+.qtag{font:600 12px var(--f-mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--accent)}
+.opts{display:grid;gap:9px}
+.opt{all:unset;cursor:pointer;border:1.5px solid var(--line);border-radius:6px;padding:13px 16px;font-size:15.5px;display:flex;gap:12px;align-items:flex-start}
+.opt span.k{font:600 13px var(--f-mono);color:var(--muted);min-width:16px}
+.opt:hover:not([aria-disabled="true"]){border-color:var(--accent)}
+.opt:focus-visible,.btn:focus-visible,input:focus-visible,.tog button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,transparent)}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 10%,transparent)}
+.opt[aria-disabled="true"]{cursor:default}
+.fb{border-radius:6px;padding:12px 14px;font-size:14.5px;display:grid;gap:4px;background:color-mix(in srgb,var(--ink) 5%,transparent)}
+.fb strong{font:600 13px var(--f-mono);letter-spacing:1px;text-transform:uppercase}
+.fb.ok strong{color:var(--ok)} .fb.bad strong{color:var(--bad)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.btn{all:unset;cursor:pointer;background:var(--ink);color:var(--bg);font-weight:600;font-size:15px;padding:12px 20px;border-radius:6px;text-align:center}
+.btn.sec{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn[aria-disabled="true"]{opacity:.35;cursor:not-allowed}
+.streak{font:500 13px var(--f-mono);color:var(--muted)}
+.blocks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.blocks.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:480px){.blocks{grid-template-columns:1fr}.blocks.three{grid-template-columns:1fr 1fr}}
+.blk{border:1px solid var(--line);border-radius:6px;padding:10px 12px;display:grid;gap:2px}
+.blk span{font-size:13px;color:var(--muted)} .blk b{font:600 20px var(--f-mono);font-variant-numeric:tabular-nums}
+.blk.hi{border-color:var(--accent)} .blk.hi b{color:var(--accent)}
+.tool{border:1px solid var(--line);border-radius:8px;padding:14px;display:grid;gap:12px;background:color-mix(in srgb,var(--ink) 3%,transparent)}
+.tool label{display:grid;gap:4px;font:500 12px var(--f-mono);letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.tool label output{font:600 15px var(--f-mono);color:var(--ink);letter-spacing:0;text-transform:none}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.tog{display:inline-flex;border:1.5px solid var(--line);border-radius:6px;overflow:hidden}
+.tog button{all:unset;cursor:pointer;padding:8px 12px;font-size:14px}
+.tog button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.note{font-size:12.5px;color:var(--muted)}
+.formula{font:500 15px var(--f-mono);background:var(--bg);border:1px dashed var(--line);border-radius:6px;padding:10px 12px;overflow-x:auto;white-space:nowrap}
+svg.fig{width:100%;max-width:420px;height:auto;display:block;margin:0 auto}
+svg .ln{stroke:var(--ink);fill:none}
+svg .mut{stroke:var(--muted);fill:none}
+svg .acc{stroke:var(--accent);fill:none}
+svg .plate{fill:var(--plate)}
+svg .tool-f{fill:var(--steel)}
+svg text{font:500 15px var(--f-mono);fill:var(--ink)}
+svg text.m{fill:var(--muted)}
+svg text.a{fill:var(--accent);font-weight:600}
+.score{font:600 clamp(64px,16vw,96px)/1 var(--f-mono);font-variant-numeric:tabular-nums}
+.score small{font-size:.35em;color:var(--muted)}
+.badge{font-family:var(--f-display);font-size:28px;font-weight:700;color:var(--accent)}
+.share{font:14px var(--f-mono);background:var(--bg);border:1px dashed var(--line);border-radius:6px;padding:12px;white-space:pre-wrap}
+.miss{display:grid;gap:8px;font-size:14px}
+.miss div{border-left:3px solid var(--bad);padding:4px 10px}
+footer{font-size:12px;color:var(--muted);display:grid;gap:3px}
+@media (prefers-reduced-motion:no-preference){.card{animation:in .25s ease}@keyframes in{from{transform:translateY(6px);opacity:.6}to{transform:none;opacity:1}}}
+</style>
+</head>
+<body>
+<main class="app">
+  <div class="top"><span class="brand">Aprende y ponte a prueba · Plegado de Strenx® 700</span><span class="count" id="count"></span></div>
+  <div class="segs" id="segs" aria-hidden="true"></div>
+  <div id="view"></div>
+  <footer>
+    <span>Datos del folleto <i>Bending of Strenx®</i> (SSAB, 2026), Tabla 2: garantías para plancha, con matrices de rodillos, fricción normal y plegado a 90° en un paso. Ante un caso real, haga una prueba y confirme con BendCalc o con el soporte técnico del fabricante.</span>
+    <span>Strenx® y Hardox® son marcas registradas de SSAB. · César Gonzales · Soldando ideas y soluciones juntos</span>
+  </footer>
+</main>
+
+<script>
+// Tabla 2 · Strenx® 700 E/F (plancha). [tMin, tMax) : Ri/t trans, Ri/t long, Rp/t trans, Rp/t long, W/t mín.
+const T=[
+  {a:0,b:8,ri:[1.5,1.8],rp:[2.0,2.5],w:10,lab:'t < 8 mm'},
+  {a:8,b:15,ri:[1.5,1.8],rp:[2.0,2.5],w:10,lab:'8 ≤ t < 15 mm'},
+  {a:15,b:20,ri:[1.7,2.1],rp:[2.0,2.5],w:12,lab:'15 ≤ t < 20 mm'},
+  {a:20,b:999,ri:[2.0,2.2],rp:[2.6,2.8],w:12,lab:'t ≥ 20 mm'}];
+const row=t=>T.find(r=>t>=r.a&&t<r.b);
+const RM=850; // resistencia a la tracción típica de Strenx® 700 E/F para calcular fuerza (Tabla 1)
+const f1=n=>n.toLocaleString('es-ES',{minimumFractionDigits:1,maximumFractionDigits:1});
+const f0=n=>Math.round(n).toLocaleString('es-ES');
+
+const PL=(y)=>[22,40,58,76,94].map(d=>`<line class="mut" x1="30" x2="330" y1="${y+d}" y2="${y+d}" stroke-width="1"/>`).join('');
+const FIG_LAM=`<svg class="fig" viewBox="0 0 360 384" role="img" aria-label="Dos planchas vistas desde arriba. Arriba: la línea de plegado cruza la laminación, recomendado. Abajo: la línea de plegado va paralela a la laminación y pide un radio mayor.">
+ <text x="20" y="20" class="a">RECOMENDADO</text>
+ <rect class="plate" x="20" y="30" width="320" height="112" rx="3"/>${PL(30)}
+ <text x="30" y="46" class="m">laminación →</text>
+ <line class="acc" x1="200" x2="200" y1="22" y2="150" stroke-width="3.5" stroke-dasharray="9 6"/>
+ <text x="20" y="166">Plegado ⟂ laminación</text>
+ <text x="20" y="184" class="m">Radio más cerrado</text>
+ <text x="20" y="220" class="m">SI NO HAY OPCIÓN</text>
+ <rect class="plate" x="20" y="230" width="320" height="112" rx="3"/>${PL(230)}
+ <text x="30" y="246" class="m">laminación →</text>
+ <line class="ln" x1="12" x2="348" y1="290" y2="290" stroke-width="3.5" stroke-dasharray="9 6"/>
+ <text x="20" y="366">Plegado ∥ laminación</text>
+ <text x="20" y="382" class="m">Pide un radio mayor</text>
+</svg>`;
+
+const FIG_TOOL=`<svg class="fig" viewBox="0 0 360 250" role="img" aria-label="Corte de plegado al aire: punzón con radio Rp, plancha de espesor t, matriz en V con abertura W y radios de entrada Rd.">
+ <path class="tool-f" d="M155 6 h50 v64 q0 25 -25 25 q-25 0 -25 -25z"/>
+ <text x="214" y="40">Punzón</text>
+ <path class="acc" d="M155 70 q0 25 25 25" stroke-width="3"/>
+ <text x="118" y="92" class="a">Rp</text>
+ <path class="plate" d="M20 120 L130 120 Q180 158 230 120 L340 120 L340 132 L230 132 Q180 172 130 132 L20 132 Z"/>
+ <text x="4" y="131">t</text>
+ <path class="tool-f" d="M30 140 h80 a12 12 0 0 1 9 4 l45 40 h32 l45 -40 a12 12 0 0 1 9 -4 h80 v60 h-300z"/>
+ <path class="acc" d="M110 140 a12 12 0 0 1 9 4" stroke-width="3.5"/>
+ <path class="acc" d="M241 144 a12 12 0 0 1 9 -4" stroke-width="3.5"/>
+ <text x="74" y="166" class="a">Rd</text><text x="262" y="166" class="a">Rd</text>
+ <line class="ln" x1="114" x2="246" y1="222" y2="222" stroke-width="1.4"/>
+ <line class="ln" x1="114" x2="114" y1="214" y2="230"/><line class="ln" x1="246" x2="246" y1="214" y2="230"/>
+ <text x="173" y="246">W</text>
+</svg>`;
+
+// Pantallas: tipo 'intro', 'learn' (con pregunta), 'result'
+const P=[
+ {k:'intro'},
+ {k:'learn',tag:'1 · Dirección de laminación',
+  body:()=>`<h2>Primero, mira hacia dónde fue laminada la plancha</h2>
+  ${FIG_LAM}
+  <ul class="learn"><li>Si puedes elegir, orienta la <b>dirección de laminación perpendicular a la línea de plegado</b>. Así la plancha de Strenx® 700 se puede plegar más cerrada.</li>
+  <li>Por eso la tabla de garantías trae dos columnas: plegado <b>transversal</b> a la laminación (radio menor) y <b>a lo largo</b> de la laminación (radio mayor).</li></ul>`,
+  q:'Vas a plegar una plancha de Strenx® 700 y puedes elegir el corte. ¿Cómo dejas la línea de plegado?',
+  o:['Paralela a la dirección de laminación','Perpendicular a la dirección de laminación','Da igual: el radio garantizado es el mismo'],c:1,
+  e:'Perpendicular. Plegando transversal a la laminación, la tabla garantiza radios menores. Para 8 a 15 mm, por ejemplo: 1,5·t transversal contra 1,8·t a lo largo.'},
+ {k:'learn',tag:'2 · Preparación',
+  body:()=>`<h2>La plancha llega lista, pero el corte y la superficie dependen del taller</h2>
+  <ul class="learn"><li><b>Bordes de corte térmico o cizallado:</b> desbarbar y redondear con esmeril.</li>
+  <li><b>Rayas, golpes u óxido:</b> eliminarlos esmerilando con cuidado, con las marcas del esmeril <b>perpendiculares a la línea de plegado</b>.</li>
+  <li><b>Granallado excesivo:</b> puede empeorar la plegabilidad.</li>
+  <li><b>Herramientas:</b> más duras que la plancha, sin desgaste fuera de tolerancia y con superficies lisas.</li></ul>`,
+  q:'Una pieza de Strenx® 700 cortada con oxicorte tiene rebaba y una raya en la zona de plegado. ¿Qué haces?',
+  o:['Pliego así: el material es tenaz','Desbarbo y redondeo el borde, y esmerilo la raya con las marcas perpendiculares a la línea de plegado','Granallo fuerte toda la pieza para dejarla limpia'],c:1,
+  e:'Los defectos superficiales pueden iniciar fisuras al plegar. El folleto pide desbarbar y redondear los bordes cortados, y esmerilar con las marcas perpendiculares a la línea de plegado. El granallado excesivo juega en contra.'},
+ {k:'learn',tag:'3 · Punzón y matriz',
+  body:()=>`<h2>El punzón y la abertura de la matriz son los parámetros que más pesan</h2>
+  ${FIG_TOOL}
+  <ul class="learn"><li>Sobre unos 600 MPa de límite elástico, como Strenx® 700, usa un <b>radio de punzón mayor que el radio interior que quieres lograr</b>: el radio final suele quedar algo menor que el del punzón.</li>
+  <li><b>Radio de entrada de la matriz (Rd):</b> al menos la mitad del espesor.</li>
+  <li>Revisa el punzón: en muchos casos, las fisuras nacen en el <b>lado de compresión</b>, por un punzón en mal estado.</li></ul>`,
+  ctx:'Plancha de 12 mm de Strenx® 700.',
+  q:'¿Cuál es el radio de entrada mínimo que debe tener la matriz?',
+  o:['3 mm','6 mm','12 mm'],c:1,
+  e:'Al menos la mitad del espesor: 12 ÷ 2 = 6 mm. Otra opción es aumentar el ancho de la matriz para bajar la presión sobre ese radio y evitar marcas.'},
+ {k:'learn',tag:'4 · La tabla de garantías',calc:'table',
+  body:()=>`<h2>Mueve el espesor y mira cómo cambian los valores</h2>
+  <div class="tool" id="tt">
+   <label>Espesor de la plancha <output id="tv"></output><input type="range" id="tr" min="4" max="50" step="1" value="16"></label>
+   <div class="row" style="justify-content:flex-start"><span class="note">Plegado</span><div class="tog" role="group" aria-label="Dirección de plegado"><button data-d="0" aria-pressed="true">transversal a la laminación</button><button data-d="1" aria-pressed="false">a lo largo</button></div></div>
+   <div class="blocks three" id="tres"></div>
+   <p class="note" id="trow"></p>
+  </div>`,
+  ctx:'Plancha de 16 mm de Strenx® 700 E, plegado transversal a la laminación.',
+  q:'¿Cuál es el radio interior mínimo garantizado?',
+  o:['24,0 mm','27,2 mm','33,6 mm'],c:1,
+  e:'Entre 15 y 20 mm, la garantía es 1,7·t transversal: 1,7 × 16 = 27,2 mm. 24,0 mm sería 1,5·t (válido bajo 15 mm) y 33,6 mm sería 2,1·t (a lo largo de la laminación).'},
+ {k:'learn',tag:'5 · Abertura de matriz',
+  body:()=>`<h2>La matriz también se elige con la tabla</h2>
+  <ul class="learn"><li>Abertura mínima recomendada para Strenx® 700 E/F: <b>W = 10·t</b> hasta 15 mm y <b>W = 12·t</b> desde 15 mm.</li>
+  <li>Una matriz más ancha baja la fuerza y puede reducir la deformación en el plegado, pero aumenta el retorno elástico.</li>
+  <li>Verifica que el ángulo y la profundidad de la matriz permitan sobreplegar <b>sin que el punzón toque fondo</b>.</li></ul>`,
+  ctx:'Plancha de 25 mm de Strenx® 700, plegado a lo largo de la laminación.',
+  q:'¿Cuál es la abertura mínima de matriz recomendada?',
+  o:['250 mm','300 mm','400 mm'],c:1,
+  e:'Desde 20 mm, la tabla pide W/t = 12 en ambas direcciones: 12 × 25 = 300 mm. Las aberturas de la tabla son guías y pueden variar algo.'},
+ {k:'learn',tag:'6 · Retorno elástico',
+  body:()=>`<h2>Strenx® 700 recupera parte del ángulo al soltarlo</h2>
+  <ul class="learn"><li>El retorno elástico <b>aumenta</b> con el límite elástico del acero, con el radio del punzón y con el ancho de la matriz.</li>
+  <li>Para planchas de menos de 10 mm, el folleto da una estimación: <b>resistencia a la tracción ÷ 100</b>. Con unos 850 MPa típicos de Strenx® 700 E/F, son unos <b>8,5°</b>, siempre que la matriz cumpla la abertura mínima.</li>
+  <li>Se compensa <b>sobreplegando</b>, con una matriz que lo permita sin acuñar el material.</li>
+  <li>Evita replegar para corregir el ángulo: reduce mucho la plegabilidad del material.</li></ul>`,
+  q:'La primera pieza de Strenx® 700 salió con el ángulo abierto. ¿Qué haces?',
+  o:['La repliego hasta corregir el ángulo','Ajusto el sobreplegado para las siguientes piezas, sin acuñar','Acuño contra el fondo de la matriz para fijar el ángulo'],c:1,
+  e:'El retorno elástico se compensa sobreplegando. Replegar reduce mucho la plegabilidad, y acuñar contra el fondo no es la vía que recomienda el folleto. Por eso conviene hacer pruebas antes de producir.'},
+ {k:'learn',tag:'7 · Fuerza de plegado',calc:'force',
+  body:()=>`<h2>¿Le da la fuerza a tu plegadora?</h2>
+  <div class="formula">P = b · t² · Rm / ((W − Rd − Rp) · 9 800)</div>
+  <p class="note">P en toneladas · b largo de plegado, t espesor, W abertura, Rd radio de matriz, Rp radio de punzón, todo en mm · Rm = 850 MPa (valor típico de Strenx® 700 E/F para este cálculo).</p>
+  <div class="tool">
+   <label>Largo de plegado b <output id="bv"></output><input type="range" id="br" min="200" max="3000" step="100" value="1000"></label>
+   <label>Espesor t <output id="fv"></output><input type="range" id="fr" min="4" max="30" step="1" value="10"></label>
+   <div class="blocks three" id="fres"></div>
+   <p class="note">La calculadora usa la abertura mínima W, Rd = t/2 y el punzón recomendado transversal. Es una estimación: el pico se asume a 120° de apertura, sin lubricación. Haz una prueba.</p>
+  </div>`,
+  ctx:'Mismo largo, mismas proporciones de herramienta.',
+  q:'Si duplicas el espesor de la plancha, ¿qué pasa con la fuerza de plegado según la fórmula?',
+  o:['Se duplica','Se multiplica por 4','No cambia'],c:1,
+  e:'La fuerza depende del espesor al cuadrado: 2² = 4. Si además la matriz crece con el espesor, el aumento real es menor, pero el orden de magnitud manda: pruébalo en la calculadora.'},
+ {k:'learn',tag:'8 · Buenas prácticas',
+  body:()=>`<h2>Las reglas que cuidan la pieza y a la gente</h2>
+  <ul class="learn"><li><b>Nadie frente a la plegadora</b> cuando se pliega acero de alta resistencia.</li>
+  <li><b>No pliegues sobre el estampado</b> de identificación de la plancha: hay riesgo de fisura.</li>
+  <li><b>Sobre 20 mm</b>, si es posible, <b>baja la velocidad del punzón</b>: la deformación rápida calienta localmente el plegado.</li>
+  <li><b>Máquina estable</b> y herramienta bien fijada; lubricar el borde de la matriz o usar radios rotativos ayuda contra el deslizamiento a saltos (stick-slip).</li>
+  <li>Para la configuración exacta, SSAB ofrece <b>BendCalc</b>: retorno elástico, profundidad del punzón y fuerza máxima.</li></ul>`,
+  ctx:'Plancha de 30 mm de Strenx® 700.',
+  q:'¿Qué recomienda el folleto para este espesor?',
+  o:['Aumentar la velocidad del punzón para terminar rápido','Reducir la velocidad del punzón, si es posible','Plegar justo sobre el estampado para ocultarlo'],c:1,
+  e:'Sobre 20 mm, una deformación rápida puede elevar la temperatura localmente y afectar la plegabilidad. Bajar la velocidad reduce esa diferencia de temperatura.'},
+ {k:'result'}
+];
+const QS=P.map((p,i)=>p.q?i:null).filter(i=>i!==null);
+const RANKS=[[8,'Especialista en plegado'],[6,'Supervisor de conformado'],[4,'Plegador calificado'],[0,'Aprendiz']];
+let S={i:0,ans:{},streak:0,best:0,dir:0,t:16,b:1000,ft:10};
+
+const $=s=>document.querySelector(s);
+function esc(t){return String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function score(){return QS.filter(i=>S.ans[i]===P[i].c).length;}
+function segs(){$('#segs').innerHTML=P.map((p,k)=>{let c='';if(k===S.i)c='now';else if(p.q&&S.ans[k]!==undefined)c=S.ans[k]===p.c?'ok':'bad';else if(k<S.i)c='seen';return `<i class="${c}"></i>`;}).join('');}
+
+function render(){
+  const p=P[S.i]; segs();
+  $('#count').textContent=`Pantalla ${S.i+1} de ${P.length}`;
+  if(p.k==='intro') return intro();
+  if(p.k==='result') return result();
+  const a=S.ans[S.i], done=a!==undefined;
+  $('#view').innerHTML=`<div class="card">
+    <div class="lvl" style="--c:var(--accent)"><b></b>${p.tag}</div>
+    ${p.body()}
+    <div class="sep"></div>
+    <span class="qtag">Reto</span>
+    ${p.ctx?`<p class="ctx">${p.ctx}</p>`:''}
+    <h3>${p.q}</h3>
+    <div class="opts">${p.o.map((o,j)=>`<button class="opt ${done&&j===p.c?'right':''} ${done&&j===a&&a!==p.c?'wrong':''}" data-j="${j}" ${done?'aria-disabled="true"':''}><span class="k">${'ABC'[j]}</span><span>${o}</span></button>`).join('')}</div>
+    ${done?`<div class="fb ${a===p.c?'ok':'bad'}"><strong>${a===p.c?'Correcto':'No es correcto'}</strong><span>${p.e}</span></div>`:''}
+    <div class="row"><span class="streak">${S.streak>=3?'Racha: '+S.streak+' seguidas':'Aciertos: '+score()+' de '+QS.length}</span>
+    <div class="row" style="justify-content:flex-end"><button class="btn sec" id="bk">Atrás</button><button class="btn" id="nx" ${done?'':'aria-disabled="true"'}>${S.i===P.length-2?'Ver mi resultado':'Siguiente'}</button></div></div></div>`;
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{ if(S.ans[S.i]!==undefined)return; const j=+b.dataset.j; S.ans[S.i]=j;
+      S.streak=j===p.c?S.streak+1:0; S.best=Math.max(S.best,S.streak); render(); });
+  $('#nx').onclick=()=>{ if(S.ans[S.i]===undefined)return; S.i++; render(); scrollTo({top:0}); };
+  $('#bk').onclick=()=>{S.i--;render();scrollTo({top:0});};
+  if(p.calc==='table') tableTool();
+  if(p.calc==='force') forceTool();
+}
+
+function tableTool(){
+  const r=$('#tr'); r.value=S.t;
+  const upd=()=>{S.t=+r.value; const t=S.t, R=row(t), d=S.dir;
+    $('#tv').textContent=t+' mm';
+    $('#tres').innerHTML=`<div class="blk hi"><span>Radio interior mín. garantizado</span><b>${f1(R.ri[d]*t)} mm</b></div>
+      <div class="blk"><span>Radio de punzón recomendado</span><b>${f1(R.rp[d]*t)} mm</b></div>
+      <div class="blk"><span>Abertura mínima de matriz</span><b>${f0(R.w*t)} mm</b></div>`;
+    $('#trow').textContent=`Fila ${R.lab}: Ri/t ${f1(R.ri[d])} · Rp/t ${f1(R.rp[d])} · W/t ${R.w} · Radio de entrada de matriz ≥ ${f1(t/2)} mm (t/2).`;
+    document.querySelectorAll('.tog button').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.d===d));};
+  r.oninput=upd;
+  document.querySelectorAll('.tog button').forEach(b=>b.onclick=()=>{S.dir=+b.dataset.d;upd();});
+  upd();
+}
+function forceTool(){
+  const br=$('#br'), fr=$('#fr'); br.value=S.b; fr.value=S.ft;
+  const upd=()=>{S.b=+br.value; S.ft=+fr.value; const b=S.b,t=S.ft,R=row(t);
+    const W=R.w*t, Rd=t/2, Rp=R.rp[0]*t, den=W-Rd-Rp, P=b*t*t*RM/(den*9800);
+    $('#bv').textContent=f0(b)+' mm'; $('#fv').textContent=t+' mm';
+    $('#fres').innerHTML=`<div class="blk hi"><span>Fuerza estimada</span><b>${f0(P)} t</b></div>
+      <div class="blk"><span>Equivale a</span><b>${f0(P*9.8)} kN</b></div>
+      <div class="blk"><span>Matriz W · Rd · Rp</span><b style="font-size:15px">${f0(W)} · ${f1(Rd)} · ${f1(Rp)}</b></div>`;};
+  br.oninput=upd; fr.oninput=upd; upd();
+}
+
+function intro(){
+  $('#view').innerHTML=`<div class="card">
+    <h1>Plegar Strenx® 700 bien a la primera</h1>
+    <p class="lede">10 pantallas para aprender y ponerte a prueba: dirección de laminación, preparación, punzón y matriz, la tabla de garantías, retorno elástico y fuerza de plegado. Cada pantalla trae un reto con su explicación, y al final ves tu nivel.</p>
+    <div class="blocks"><div class="blk"><span>Retos</span><b>${QS.length}</b></div><div class="blk"><span>Calculadoras</span><b>2</b></div></div>
+    <div class="row"><span class="streak">Toma unos 5 minutos</span><button class="btn" id="go">Empezar</button></div></div>`;
+  $('#go').onclick=()=>{S.i=1;render();};
+}
+
+function result(){
+  const sc=score(), rk=RANKS.find(r=>sc>=r[0])[1];
+  const miss=QS.filter(i=>S.ans[i]!==P[i].c);
+  const txt=`Obtuve ${sc}/${QS.length} en el reto de plegado de Strenx® 700. Nivel: ${rk}.`;
+  $('#count').textContent='Resultado';
+  $('#view').innerHTML=`<div class="card">
+    <div class="lvl" style="--c:var(--accent)"><b></b>Tu resultado</div>
+    <div class="score">${sc}<small> / ${QS.length}</small></div>
+    <div class="badge">${rk}</div>
+    <p class="lede">Mejor racha: ${S.best} respuestas seguidas.</p>
+    <span class="streak">Compártelo en los comentarios del post:</span>
+    <div class="share" id="sh">${esc(txt)}</div>
+    <div class="row" style="justify-content:flex-start"><button class="btn" id="cp">Copiar mi resultado</button><button class="btn sec" id="rs">Intentar de nuevo</button></div>
+    <span class="streak" id="cpok"></span>
+    ${miss.length?`<h3>Para repasar</h3><div class="miss">${miss.map(i=>`<div><b>${P[i].q}</b><br>${P[i].e}</div>`).join('')}</div>`:'<p class="lede">Todo correcto. Así se pliega Strenx® 700: con método y a la primera.</p>'}
+  </div>`;
+  $('#cp').onclick=async()=>{try{await navigator.clipboard.writeText(txt);$('#cpok').textContent='Copiado. Pégalo en los comentarios.';}catch(e){const r=document.createRange();r.selectNodeContents($('#sh'));const s=getSelection();s.removeAllRanges();s.addRange(r);$('#cpok').textContent='Texto seleccionado: cópialo.';}};
+  $('#rs').onclick=()=>{S={i:0,ans:{},streak:0,best:0,dir:0,t:16,b:1000,ft:10};render();};
+}
+render();
+</script>
+</body>
+</html>
