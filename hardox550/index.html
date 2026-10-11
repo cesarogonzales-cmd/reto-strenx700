@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Soldadura Hardox® 550</title>
+<meta name="description" content="Aprende y ponte a prueba: 10 pantallas sobre la soldadura de Hardox® 550, con datos de la ficha técnica y la guía de soldadura de SSAB.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Misma ficha de taller que el Reto Strenx® 700 de soldadura: una tarjeta por pantalla, barra de 10 segmentos. */
+:root{
+  --bg:#EDF0F2; --panel:#FFFFFF; --ink:#17202A; --muted:#56626E; --line:#CDD4DA;
+  --steel:#8794A0; --straw:#C99A2E; --bronze:#AD5F25; --blue:#3C6CA3; --accent:#AD5F25;
+  --ok:#2E7B53; --bad:#B03A2E; --plate:#B8C1C9;
+  --f-display:'Barlow Condensed','Arial Narrow',Arial,sans-serif;
+  --f-body:'IBM Plex Sans',-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11171D; --panel:#1A222A; --ink:#E7ECF0; --muted:#9AA7B3; --line:#2E3A45;
+  --steel:#6E7C89; --straw:#E0B04E; --bronze:#D58548; --blue:#6E9BD0; --accent:#D58548;
+  --ok:#5CBB87; --bad:#E2695B; --plate:#4A5866; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#11171D; --panel:#1A222A; --ink:#E7ECF0; --muted:#9AA7B3; --line:#2E3A45;
+  --steel:#6E7C89; --straw:#E0B04E; --bronze:#D58548; --blue:#6E9BD0; --accent:#D58548;
+  --ok:#5CBB87; --bad:#E2695B; --plate:#4A5866; color-scheme:dark }
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);margin:0}
+.app{max-width:720px;margin:0 auto;padding-inline:16px;padding-block:22px 40px;display:grid;gap:16px}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.brand{font:600 12px var(--f-mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--accent)}
+.count{font:500 13px var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.segs{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}
+.segs i{height:6px;border-radius:2px;background:var(--line)}
+.segs i.ok{background:var(--ok)} .segs i.bad{background:var(--bad)} .segs i.now{background:var(--ink)} .segs i.seen{background:var(--steel)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:26px 22px;display:grid;gap:14px;min-height:360px;align-content:start}
+.lvl{font:600 12px var(--f-mono);letter-spacing:1.4px;text-transform:uppercase;display:flex;gap:10px;align-items:center;color:var(--muted)}
+.lvl b{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c,var(--steel))}
+h1,h2,h3{font-family:var(--f-display);margin:0;line-height:1.08;text-wrap:balance}
+h1{font-size:clamp(36px,8vw,56px)}
+h2{font-size:clamp(25px,5vw,32px);font-weight:600}
+h3{font-size:clamp(21px,4.2vw,25px);font-weight:600}
+p{margin:0}
+.lede{color:var(--muted);max-width:62ch}
+.learn{display:grid;gap:8px;margin:0;padding-left:20px}
+.learn li{padding-left:2px}
+.learn b{font-weight:600}
+.ctx{font-size:14.5px;color:var(--muted);border-left:3px solid var(--line);padding-left:12px}
+.sep{height:1px;background:var(--line);margin:4px 0}
+.qtag{font:600 12px var(--f-mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--accent)}
+.opts{display:grid;gap:9px}
+.opt{all:unset;cursor:pointer;border:1.5px solid var(--line);border-radius:6px;padding:13px 16px;font-size:15.5px;display:flex;gap:12px;align-items:flex-start}
+.opt span.k{font:600 13px var(--f-mono);color:var(--muted);min-width:16px}
+.opt:hover:not([aria-disabled="true"]){border-color:var(--accent)}
+.opt:focus-visible,.btn:focus-visible,input:focus-visible,.tog button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,transparent)}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 10%,transparent)}
+.opt[aria-disabled="true"]{cursor:default}
+.fb{border-radius:6px;padding:12px 14px;font-size:14.5px;display:grid;gap:4px;background:color-mix(in srgb,var(--ink) 5%,transparent)}
+.fb strong{font:600 13px var(--f-mono);letter-spacing:1px;text-transform:uppercase}
+.fb.ok strong{color:var(--ok)} .fb.bad strong{color:var(--bad)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.btn{all:unset;cursor:pointer;background:var(--ink);color:var(--bg);font-weight:600;font-size:15px;padding:12px 20px;border-radius:6px;text-align:center}
+.btn.sec{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn[aria-disabled="true"]{opacity:.35;cursor:not-allowed}
+.streak{font:500 13px var(--f-mono);color:var(--muted)}
+.blocks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.blocks.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:480px){.blocks{grid-template-columns:1fr}.blocks.three{grid-template-columns:1fr 1fr}}
+.blk{border:1px solid var(--line);border-radius:6px;padding:10px 12px;display:grid;gap:2px}
+.blk span{font-size:13px;color:var(--muted)} .blk b{font:600 20px var(--f-mono);font-variant-numeric:tabular-nums}
+.blk.hi{border-color:var(--accent)} .blk.hi b{color:var(--accent)}
+.tool{border:1px solid var(--line);border-radius:8px;padding:14px;display:grid;gap:12px;background:color-mix(in srgb,var(--ink) 3%,transparent)}
+.tool label{display:grid;gap:4px;font:500 12px var(--f-mono);letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.tool label output{font:600 15px var(--f-mono);color:var(--ink);letter-spacing:0;text-transform:none}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.tog{display:inline-flex;border:1.5px solid var(--line);border-radius:6px;overflow:hidden}
+.tog button{all:unset;cursor:pointer;padding:8px 12px;font-size:14px}
+.tog button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.note{font-size:12.5px;color:var(--muted)}
+.formula{font:500 15px var(--f-mono);background:var(--bg);border:1px dashed var(--line);border-radius:6px;padding:10px 12px;overflow-x:auto;white-space:nowrap}
+svg.fig{width:100%;max-width:420px;height:auto;display:block;margin:0 auto}
+svg .ln{stroke:var(--ink);fill:none}
+svg .mut{stroke:var(--muted);fill:none}
+svg .acc{stroke:var(--accent);fill:none}
+svg .plate{fill:var(--plate)}
+svg .tool-f{fill:var(--steel)}
+svg text{font:500 15px var(--f-mono);fill:var(--ink)}
+svg text.m{fill:var(--muted)}
+svg text.a{fill:var(--accent);font-weight:600}
+.score{font:600 clamp(64px,16vw,96px)/1 var(--f-mono);font-variant-numeric:tabular-nums}
+.score small{font-size:.35em;color:var(--muted)}
+.badge{font-family:var(--f-display);font-size:28px;font-weight:700;color:var(--accent)}
+.share{font:14px var(--f-mono);background:var(--bg);border:1px dashed var(--line);border-radius:6px;padding:12px;white-space:pre-wrap}
+.miss{display:grid;gap:8px;font-size:14px}
+.miss div{border-left:3px solid var(--bad);padding:4px 10px}
+footer{font-size:12px;color:var(--muted);display:grid;gap:3px}
+@media (prefers-reduced-motion:no-preference){.card{animation:in .25s ease}@keyframes in{from{transform:translateY(6px);opacity:.6}to{transform:none;opacity:1}}}
+</style>
+</head>
+<body>
+<main class="app">
+  <div class="top"><span class="brand">Aprende y ponte a prueba · Soldadura de Hardox® 550</span><span class="count" id="count"></span></div>
+  <div class="segs" id="segs" aria-hidden="true"></div>
+  <div id="view"></div>
+  <footer>
+    <span>Datos de la ficha técnica de Hardox® 550 de SSAB (169es, 2019-01-31) y del folleto <i>Soldadura de Hardox®</i> de SSAB (103-ES, V3, 2024): Tablas 3 y 4a y recomendaciones de taller. Límites de espesor leídos de la Tabla 4a. Ante un caso real, confirme con WeldCalc™ o con el soporte técnico del fabricante.</span>
+    <span>Strenx® y Hardox® son marcas registradas de SSAB. · César Gonzales · Soldando ideas y soluciones juntos</span>
+  </footer>
+</main>
+
+<script>
+// Tabla 4a (aporte térmico ≥ 1,7 kJ/mm). Cada aumento empieza 0,1 mm sobre el límite.
+const preheat=t=> t<=11 ? 125 : t<=30 ? 175 : 200;
+const f0=n=>Math.round(n).toLocaleString('es-ES');
+
+const P=[
+ {k:'intro'},
+ {k:'learn',tag:'1 · El material',
+  body:()=>`<h2>Hardox® 550: dureza alta, sin descuidar la tenacidad</h2>
+  <ul class="learn"><li>Dureza nominal de <b>550 HBW</b>, con un rango garantizado de <b>525 a 575 HBW</b>, y una resistencia similar a la del Hardox® 500.</li>
+  <li>Según la ficha, está diseñado para dar mayor durabilidad frente al desgaste, <b>pero no a costa de la formación de grietas</b>.</li>
+  <li>Se entrega en espesores de <b>8 a 65 mm</b>.</li>
+  <li>Es un acero templado: la <b>dureza mínima del núcleo es el 90 %</b> de la dureza superficial mínima garantizada.</li></ul>`,
+  q:'Según la ficha, ¿cuál es la dureza mínima del núcleo de una plancha de Hardox® 550?',
+  o:['Unos 425 HBW','Unos 473 HBW (90 % de 525 HBW)','550 HBW, igual que la superficie'],c:1,
+  e:'La dureza mínima del núcleo es el 90 % de la dureza superficial mínima garantizada: 0,9 × 525 = 472,5 HBW. Por eso Hardox® 550 sigue resistiendo el desgaste a medida que la plancha se gasta.'},
+ {k:'learn',tag:'2 · Cuidado con el calor',
+  body:()=>`<h2>250 °C: el límite que no se negocia</h2>
+  <ul class="learn"><li>Hardox® 550 obtiene sus propiedades por templado (y, cuando hace falta, revenido). <b>No está pensado para tratamientos térmicos posteriores.</b></li>
+  <li>Según la ficha, sus propiedades de entrega <b>no se conservan si se somete a temperaturas superiores a 250 °C</b>.</li>
+  <li>Esto pesa en enderezados con soplete, en calentamientos localizados y en cualquier proceso que caliente la plancha más de lo necesario.</li></ul>`,
+  q:'Vas a enderezar con calor una pieza de Hardox® 550. ¿Sobre qué temperatura deja de conservar sus propiedades de entrega?',
+  o:['200 °C','250 °C','580 °C'],c:1,
+  e:'250 °C, según la ficha técnica. Ojo: la temperatura máxima entre pasadas en soldadura (225 °C) es otra recomendación, de la guía de soldadura.'},
+ {k:'learn',tag:'3 · Precalentamiento',calc:'pre',
+  body:()=>`<h2>La Tabla 4a, para Hardox® 550</h2>
+  <div class="tool">
+   <label>Espesor de la chapa <output id="tv"></output><input type="range" id="tr" min="8" max="65" step="1" value="20"></label>
+   <div class="row" style="justify-content:flex-start"><span class="note">Aporte térmico</span><div class="tog" id="qtog" role="group" aria-label="Aporte térmico"><button data-q="0" aria-pressed="true">1,7 kJ/mm o más</button><button data-q="1" aria-pressed="false">1,0–1,69</button><button data-q="2" aria-pressed="false">menos de 1,0</button></div></div>
+   <label style="display:flex;gap:8px;align-items:center;text-transform:none;letter-spacing:0;font:400 14px var(--f-body);color:var(--ink)"><input type="checkbox" id="cold"> Humedad alta o ambiente bajo 5 °C</label>
+   <div class="blocks" id="pres"></div>
+   <p class="note" id="pnote"></p>
+  </div>
+  <ul class="learn"><li>La tabla aplica para aportes térmicos de <b>1,7 kJ/mm o más</b>. Con 1,0–1,69 kJ/mm se recomienda <b>subir 25 °C</b>; con menos de 1,0 kJ/mm, usar <b>WeldCalc™</b>.</li>
+  <li>Con humedad alta o temperatura bajo 5 °C, los valores mínimos deben <b>aumentarse en 25 °C</b>.</li>
+  <li>Mide bien: la temperatura mínima debe lograrse en una zona de <b>75 + 75 mm</b> alrededor de la junta, y hay que esperar <b>2 min por cada 25 mm</b> de espesor antes de medir.</li></ul>`,
+  ctx:'Chapa de 20 mm de Hardox® 550, aporte térmico de 1,7 kJ/mm o más, taller a unos 20 °C.',
+  q:'¿Cuál es la temperatura mínima de precalentamiento?',
+  o:['125 °C','175 °C','200 °C'],c:1,
+  e:'En la Tabla 4a, Hardox® 550 pide 175 °C en este rango de espesor. 125 °C corresponde a las chapas más delgadas y 200 °C a las más gruesas (sobre unos 30 mm).'},
+ {k:'learn',tag:'4 · Aceros distintos',
+  body:()=>`<h2>En un blindaje, casi siempre se unen aceros distintos</h2>
+  <ul class="learn"><li>Cuando se sueldan chapas de <b>la misma calidad</b> pero de distinto espesor, <b>la chapa más gruesa</b> define el precalentamiento y la temperatura entre pasadas.</li>
+  <li>Cuando se sueldan <b>distintos tipos de acero</b>, manda <b>el que requiere la temperatura de precalentamiento más alta</b>.</li>
+  <li>Al soldar un blindaje de Hardox® 550 sobre una hoja o un cucharón, hay que revisar el precalentamiento de los dos aceros y aplicar el mayor.</li></ul>`,
+  ctx:'Blindaje de Hardox® 550 de 20 mm (Tabla 4a: 175 °C) soldado sobre un acero base que, según su fabricante, pide 100 °C.',
+  q:'¿Qué precalentamiento mínimo aplicas a la unión?',
+  o:['100 °C, el del acero base','137 °C, el promedio','175 °C, el más alto de los dos'],c:2,
+  e:'Con aceros distintos manda el que pide la temperatura más alta: 175 °C. No se promedia.'},
+ {k:'learn',tag:'5 · Aporte térmico',
+  body:()=>`<h2>Menos aporte térmico, más precalentamiento</h2>
+  <ul class="learn"><li>Las temperaturas de la Tabla 4a valen para aportes térmicos de <b>1,7 kJ/mm o más</b>.</li>
+  <li>Con <b>1,0 a 1,69 kJ/mm</b>, la guía recomienda <b>subir 25 °C</b> sobre el valor de la tabla.</li>
+  <li>Con <b>menos de 1,0 kJ/mm</b>, recomienda calcular la temperatura mínima con <b>WeldCalc™</b> de SSAB.</li>
+  <li>Un aporte excesivo ensancha la zona afectada por el calor y afecta sus propiedades y su resistencia al desgaste.</li></ul>`,
+  ctx:'Chapa de 25 mm de Hardox® 550 (Tabla 4a: 175 °C), soldada con 1,2 kJ/mm.',
+  q:'¿Cuál es la temperatura mínima de precalentamiento recomendada?',
+  o:['175 °C','200 °C','Hay que usar WeldCalc™'],c:1,
+  e:'Con 1,0–1,69 kJ/mm se suman 25 °C al valor de la tabla: 175 + 25 = 200 °C. WeldCalc™ es para aportes menores a 1,0 kJ/mm.'},
+ {k:'learn',tag:'6 · Entre pasadas',
+  body:()=>`<h2>La temperatura máxima entre pasadas también se controla</h2>
+  <ul class="learn"><li>Para Hardox® 550, la temperatura <b>máxima</b> recomendada entre pasadas es <b>225 °C</b> (Tabla 3).</li>
+  <li>Se mide en la unión (sobre el metal de soldadura) o justo al lado, inmediatamente antes de iniciar la pasada siguiente.</li>
+  <li>El precalentamiento es la temperatura <b>mínima</b>; la de entre pasadas es la <b>máxima</b>. Hay que trabajar dentro de esa ventana.</li></ul>`,
+  ctx:'Soldadura de varias pasadas sobre Hardox® 550. El termómetro marca 240 °C junto a la unión.',
+  q:'¿Qué haces?',
+  o:['Sigo soldando: más calor ayuda a evitar fisuras','Espero a que baje a 225 °C o menos antes de la siguiente pasada','Aplico agua para enfriar rápido'],c:1,
+  e:'La máxima recomendada entre pasadas para Hardox® 550 es 225 °C: se espera a que la unión baje antes de seguir. Enfriar con agua no es una práctica de la guía.'},
+ {k:'learn',tag:'7 · Hidrógeno y consumibles',
+  body:()=>`<h2>El hidrógeno se controla desde el consumible</h2>
+  <ul class="learn"><li>Usa procesos y consumibles con <b>como máximo 5 ml de hidrógeno por cada 100 g</b> de metal de soldadura, y guárdalos según el fabricante.</li>
+  <li>Para Hardox® se recomiendan normalmente consumibles <b>no aleados o de baja aleación con límite elástico máximo de 500 MPa</b>. Los de mayor resistencia (hasta 900 MPa) la guía los admite <b>solo para Hardox® 400 y 450 en 0,7–6,0 mm</b>.</li>
+  <li>Los consumibles de baja aleación dan un metal de soldadura más duro, lo que <b>puede reducir su desgaste</b>.</li>
+  <li>Junta limpia: sin óxido, grasa, aceite ni escarcha.</li></ul>`,
+  q:'¿Puedes usar un consumible de 900 MPa de límite elástico para soldar Hardox® 550?',
+  o:['Sí, siempre conviene el más resistente','No: la guía lo admite solo para Hardox® 400 y 450 en 0,7–6,0 mm','Sí, si precalientas a 225 °C'],c:1,
+  e:'Para Hardox® la guía recomienda normalmente consumibles de hasta 500 MPa de límite elástico. Los de hasta 900 MPa los admite solo para Hardox® 400 y 450 de 0,7 a 6,0 mm.'},
+ {k:'learn',tag:'8 · Práctica de taller',
+  body:()=>`<h2>Detalles que evitan fisuras</h2>
+  <ul class="learn"><li>Puntos de soldadura de <b>al menos 50 mm</b> de largo.</li>
+  <li>Inicios y finales de cordón, preferentemente a <b>50–100 mm de una esquina</b>.</li>
+  <li>Separación de raíz de <b>3 mm como máximo</b>.</li>
+  <li>Una secuencia de soldadura que minimice las tensiones residuales.</li></ul>`,
+  ctx:'Vas a soldar el contorno de una plancha de blindaje de Hardox® 550.',
+  q:'¿Dónde conviene iniciar y terminar los cordones?',
+  o:['Justo en la esquina, para cerrarla bien','Preferentemente a 50–100 mm de una esquina','Da igual dónde'],c:1,
+  e:'La guía recomienda situar comienzos y finales preferentemente a 50–100 mm de una esquina, para evitar tensiones excesivas en esa zona.'},
+ {k:'result'}
+];
+const QS=P.map((p,i)=>p.q?i:null).filter(i=>i!==null);
+const RANKS=[[8,'Especialista en Hardox® 550'],[6,'Supervisor de soldadura'],[4,'Soldador calificado'],[0,'Aprendiz']];
+let S={i:0,ans:{},streak:0,best:0,t:20,qi:0,cold:false};
+
+const $=s=>document.querySelector(s);
+function esc(t){return String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function score(){return QS.filter(i=>S.ans[i]===P[i].c).length;}
+function segs(){$('#segs').innerHTML=P.map((p,k)=>{let c='';if(k===S.i)c='now';else if(p.q&&S.ans[k]!==undefined)c=S.ans[k]===p.c?'ok':'bad';else if(k<S.i)c='seen';return `<i class="${c}"></i>`;}).join('');}
+
+function render(){
+  const p=P[S.i]; segs();
+  $('#count').textContent=`Pantalla ${S.i+1} de ${P.length}`;
+  if(p.k==='intro') return intro();
+  if(p.k==='result') return result();
+  const a=S.ans[S.i], done=a!==undefined;
+  $('#view').innerHTML=`<div class="card">
+    <div class="lvl" style="--c:var(--accent)"><b></b>${p.tag}</div>
+    ${p.body()}
+    <div class="sep"></div>
+    <span class="qtag">Reto</span>
+    ${p.ctx?`<p class="ctx">${p.ctx}</p>`:''}
+    <h3>${p.q}</h3>
+    <div class="opts">${p.o.map((o,j)=>`<button class="opt ${done&&j===p.c?'right':''} ${done&&j===a&&a!==p.c?'wrong':''}" data-j="${j}" ${done?'aria-disabled="true"':''}><span class="k">${'ABC'[j]}</span><span>${o}</span></button>`).join('')}</div>
+    ${done?`<div class="fb ${a===p.c?'ok':'bad'}"><strong>${a===p.c?'Correcto':'No es correcto'}</strong><span>${p.e}</span></div>`:''}
+    <div class="row"><span class="streak">${S.streak>=3?'Racha: '+S.streak+' seguidas':'Aciertos: '+score()+' de '+QS.length}</span>
+    <div class="row" style="justify-content:flex-end"><button class="btn sec" id="bk">Atrás</button><button class="btn" id="nx" ${done?'':'aria-disabled="true"'}>${S.i===P.length-2?'Ver mi resultado':'Siguiente'}</button></div></div></div>`;
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{ if(S.ans[S.i]!==undefined)return; const j=+b.dataset.j; S.ans[S.i]=j;
+      S.streak=j===p.c?S.streak+1:0; S.best=Math.max(S.best,S.streak); render(); });
+  $('#nx').onclick=()=>{ if(S.ans[S.i]===undefined)return; S.i++; render(); scrollTo({top:0}); };
+  $('#bk').onclick=()=>{S.i--;render();scrollTo({top:0});};
+  if(p.calc==='pre') preTool();
+}
+
+function preTool(){
+  const r=$('#tr'), cb=$('#cold'); r.value=S.t; cb.checked=S.cold;
+  const upd=()=>{S.t=+r.value; S.cold=cb.checked; const t=S.t, base=preheat(t);
+    $('#tv').textContent=t+' mm';
+    document.querySelectorAll('#qtog button').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.q===S.qi));
+    let val, note;
+    const extra=(S.qi===1?1:0)+(S.cold?1:0);
+    if(S.qi===2){ val='WeldCalc™'; note='Con aporte térmico menor a 1,0 kJ/mm, la guía recomienda calcular la temperatura mínima con WeldCalc™.'; }
+    else if(extra===2){ val='Consultar'; note='Se juntan dos condiciones (aporte de 1,0–1,69 kJ/mm y humedad o frío). La guía las indica por separado: confirma el valor con WeldCalc™ o con el soporte técnico de SSAB.'; }
+    else { val=(base+25*extra)+' °C'; note=`Tabla 4a: ${base} °C para ${t} mm${extra?' + 25 °C por la condición marcada':''}. Límites de espesor: 125 °C hasta 11 mm · 175 °C de 11,1 a 30 mm · 200 °C de 30,1 a 65 mm.`; }
+    $('#pres').innerHTML=`<div class="blk hi"><span>Precalentamiento mínimo</span><b>${val}</b></div><div class="blk"><span>Máxima entre pasadas (Tabla 3)</span><b>225 °C</b></div>`;
+    $('#pnote').textContent=note;};
+  r.oninput=upd; cb.onchange=upd;
+  document.querySelectorAll('#qtog button').forEach(b=>b.onclick=()=>{S.qi=+b.dataset.q;upd();});
+  upd();
+}
+
+function intro(){
+  $('#view').innerHTML=`<div class="card">
+    <h1>Soldar bien un blindaje de Hardox® 550</h1>
+    <p class="lede">10 pantallas para aprender y ponerte a prueba: el material, el límite de 250 °C, precalentamiento según la Tabla 4a, aceros distintos, aporte térmico, temperatura entre pasadas, consumibles y práctica de taller. Cada pantalla trae un reto con su explicación, y al final ves tu nivel.</p>
+    <div class="blocks"><div class="blk"><span>Retos</span><b>${QS.length}</b></div><div class="blk"><span>Calculadora</span><b>1</b></div></div>
+    <div class="row"><span class="streak">Toma unos 5 minutos</span><button class="btn" id="go">Empezar</button></div></div>`;
+  $('#go').onclick=()=>{S.i=1;render();};
+}
+
+function result(){
+  const sc=score(), rk=RANKS.find(r=>sc>=r[0])[1];
+  const miss=QS.filter(i=>S.ans[i]!==P[i].c);
+  const txt=`Obtuve ${sc}/${QS.length} en el reto de soldadura de Hardox® 550. Nivel: ${rk}.`;
+  $('#count').textContent='Resultado';
+  $('#view').innerHTML=`<div class="card">
+    <div class="lvl" style="--c:var(--accent)"><b></b>Tu resultado</div>
+    <div class="score">${sc}<small> / ${QS.length}</small></div>
+    <div class="badge">${rk}</div>
+    <p class="lede">Mejor racha: ${S.best} respuestas seguidas.</p>
+    <span class="streak">Compártelo en los comentarios del post:</span>
+    <div class="share" id="sh">${esc(txt)}</div>
+    <div class="row" style="justify-content:flex-start"><button class="btn" id="cp">Copiar mi resultado</button><button class="btn sec" id="rs">Intentar de nuevo</button></div>
+    <span class="streak" id="cpok"></span>
+    ${miss.length?`<h3>Para repasar</h3><div class="miss">${miss.map(i=>`<div><b>${P[i].q}</b><br>${P[i].e}</div>`).join('')}</div>`:'<p class="lede">Todo correcto. Así se suelda un blindaje de Hardox® 550: con método.</p>'}
+  </div>`;
+  $('#cp').onclick=async()=>{try{await navigator.clipboard.writeText(txt);$('#cpok').textContent='Copiado. Pégalo en los comentarios.';}catch(e){const r=document.createRange();r.selectNodeContents($('#sh'));const s=getSelection();s.removeAllRanges();s.addRange(r);$('#cpok').textContent='Texto seleccionado: cópialo.';}};
+  $('#rs').onclick=()=>{S={i:0,ans:{},streak:0,best:0,t:20,qi:0,cold:false};render();};
+}
+render();
+</script>
+</body>
+</html>
