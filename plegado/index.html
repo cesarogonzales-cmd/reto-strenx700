@@ -107,7 +107,7 @@ footer{font-size:12px;color:var(--muted);display:grid;gap:3px}
   <div class="segs" id="segs" aria-hidden="true"></div>
   <div id="view"></div>
   <footer>
-    <span>Datos del folleto <i>Bending of Strenx®</i> (SSAB, 2026), Tabla 2: garantías para plancha, con matrices de rodillos, fricción normal y plegado a 90° en un paso. Ante un caso real, haga una prueba y confirme con BendCalc o con el soporte técnico del fabricante.</span>
+    <span>Datos del folleto <i>Bending of Strenx®</i> de SSAB (422-EN, 2026). Tabla 2: garantías y recomendaciones para plancha, basadas en matrices con rodillos, fricción normal (sin lubricación) y ensayos de plegado a 90° en un paso, medidos tras la descarga. Ante un caso real, haga una prueba y confirme con BendCalc o con el soporte técnico del fabricante.</span>
     <span>Strenx® y Hardox® son marcas registradas de SSAB. · César Gonzales · Soldando ideas y soluciones juntos</span>
   </footer>
 </main>
@@ -162,15 +162,15 @@ const P=[
  {k:'learn',tag:'1 · Dirección de laminación',
   body:()=>`<h2>Primero, mira hacia dónde fue laminada la plancha</h2>
   ${FIG_LAM}
-  <ul class="learn"><li>Si puedes elegir, orienta la <b>dirección de laminación perpendicular a la línea de plegado</b>. Así la plancha de Strenx® 700 se puede plegar más cerrada.</li>
+  <ul class="learn"><li>Si puedes elegir, orienta la <b>dirección de laminación perpendicular a la línea de plegado</b>. Así, a menudo la plancha de Strenx® 700 se puede plegar más cerrada.</li>
   <li>Por eso la tabla de garantías trae dos columnas: plegado <b>transversal</b> a la laminación (radio menor) y <b>a lo largo</b> de la laminación (radio mayor).</li></ul>`,
   q:'Vas a plegar una plancha de Strenx® 700 y puedes elegir el corte. ¿Cómo dejas la línea de plegado?',
   o:['Paralela a la dirección de laminación','Perpendicular a la dirección de laminación','Da igual: el radio garantizado es el mismo'],c:1,
   e:'Perpendicular. Plegando transversal a la laminación, la tabla garantiza radios menores. Para 8 a 15 mm, por ejemplo: 1,5·t transversal contra 1,8·t a lo largo.'},
  {k:'learn',tag:'2 · Preparación',
-  body:()=>`<h2>La plancha llega lista, pero el corte y la superficie dependen del taller</h2>
+  body:()=>`<h2>Antes de plegar: revisa la superficie, los bordes y las herramientas</h2>
   <ul class="learn"><li><b>Bordes de corte térmico o cizallado:</b> desbarbar y redondear con esmeril.</li>
-  <li><b>Rayas, golpes u óxido:</b> eliminarlos esmerilando con cuidado, con las marcas del esmeril <b>perpendiculares a la línea de plegado</b>.</li>
+  <li><b>Rayas u óxido:</b> el daño superficial puede empeorar la plegabilidad. En planchas gruesas, a menudo se eliminan esmerilando con cuidado, con las marcas del esmeril, de preferencia, <b>perpendiculares a la línea de plegado</b>.</li>
   <li><b>Granallado excesivo:</b> puede empeorar la plegabilidad.</li>
   <li><b>Herramientas:</b> más duras que la plancha, sin desgaste fuera de tolerancia y con superficies lisas.</li></ul>`,
   q:'Una pieza de Strenx® 700 cortada con oxicorte tiene rebaba y una raya en la zona de plegado. ¿Qué haces?',
@@ -181,7 +181,7 @@ const P=[
   ${FIG_TOOL}
   <ul class="learn"><li>Sobre unos 600 MPa de límite elástico, como Strenx® 700, usa un <b>radio de punzón mayor que el radio interior que quieres lograr</b>: el radio final suele quedar algo menor que el del punzón.</li>
   <li><b>Radio de entrada de la matriz (Rd):</b> al menos la mitad del espesor.</li>
-  <li>Revisa el punzón: en muchos casos, las fisuras nacen en el <b>lado de compresión</b>, por un punzón en mal estado.</li></ul>`,
+  <li>Revisa el punzón: cuando una pieza se fisura al plegar, en muchos casos la fisura parte del <b>lado de compresión</b>, y a menudo se debe a un punzón en mal estado.</li></ul>`,
   ctx:'Plancha de 12 mm de Strenx® 700.',
   q:'¿Cuál es el radio de entrada mínimo que debe tener la matriz?',
   o:['3 mm','6 mm','12 mm'],c:1,
@@ -200,17 +200,17 @@ const P=[
   e:'Entre 15 y 20 mm, la garantía es 1,7·t transversal: 1,7 × 16 = 27,2 mm. 24,0 mm sería 1,5·t (válido bajo 15 mm) y 33,6 mm sería 2,1·t (a lo largo de la laminación).'},
  {k:'learn',tag:'5 · Abertura de matriz',
   body:()=>`<h2>La matriz también se elige con la tabla</h2>
-  <ul class="learn"><li>Abertura mínima recomendada para Strenx® 700 E/F: <b>W = 10·t</b> hasta 15 mm y <b>W = 12·t</b> desde 15 mm.</li>
-  <li>Una matriz más ancha baja la fuerza y puede reducir la deformación en el plegado, pero aumenta el retorno elástico.</li>
+  <ul class="learn"><li>Abertura mínima recomendada para Strenx® 700 E/F: <b>W = 10·t</b> bajo 15 mm y <b>W = 12·t</b> desde 15 mm.</li>
+  <li>Una matriz más ancha baja la fuerza y, en muchos casos, reduce la deformación en el plegado, pero aumenta el retorno elástico.</li>
   <li>Verifica que el ángulo y la profundidad de la matriz permitan sobreplegar <b>sin que el punzón toque fondo</b>.</li></ul>`,
   ctx:'Plancha de 25 mm de Strenx® 700, plegado a lo largo de la laminación.',
   q:'¿Cuál es la abertura mínima de matriz recomendada?',
   o:['250 mm','300 mm','400 mm'],c:1,
-  e:'Desde 20 mm, la tabla pide W/t = 12 en ambas direcciones: 12 × 25 = 300 mm. Las aberturas de la tabla son guías y pueden variar algo.'},
+  e:'Desde 15 mm, la abertura mínima recomendada es W/t = 12, y no depende de la dirección de laminación: 12 × 25 = 300 mm. El folleto aclara que las aberturas son guías y pueden variar algo.'},
  {k:'learn',tag:'6 · Retorno elástico',
   body:()=>`<h2>Strenx® 700 recupera parte del ángulo al soltarlo</h2>
-  <ul class="learn"><li>El retorno elástico <b>aumenta</b> con el límite elástico del acero, con el radio del punzón y con el ancho de la matriz.</li>
-  <li>Para planchas de menos de 10 mm, el folleto da una estimación: <b>resistencia a la tracción ÷ 100</b>. Con unos 850 MPa típicos de Strenx® 700 E/F, son unos <b>8,5°</b>, siempre que la matriz cumpla la abertura mínima.</li>
+  <ul class="learn"><li>El retorno elástico <b>aumenta</b> con el límite elástico del acero (el factor que más influye), con el radio del punzón y con el ancho de la matriz; también influye el endurecimiento por deformación del material.</li>
+  <li>Es difícil predecirlo con exactitud porque depende de cada configuración de herramientas: por eso el folleto recomienda hacer pruebas.</li>
   <li>Se compensa <b>sobreplegando</b>, con una matriz que lo permita sin acuñar el material.</li>
   <li>Evita replegar para corregir el ángulo: reduce mucho la plegabilidad del material.</li></ul>`,
   q:'La primera pieza de Strenx® 700 salió con el ángulo abierto. ¿Qué haces?',
@@ -219,27 +219,27 @@ const P=[
  {k:'learn',tag:'7 · Fuerza de plegado',calc:'force',
   body:()=>`<h2>¿Le da la fuerza a tu plegadora?</h2>
   <div class="formula">P = b · t² · Rm / ((W − Rd − Rp) · 9 800)</div>
-  <p class="note">P en toneladas · b largo de plegado, t espesor, W abertura, Rd radio de matriz, Rp radio de punzón, todo en mm · Rm = 850 MPa (valor típico de Strenx® 700 E/F para este cálculo).</p>
+  <p class="note">P en toneladas métricas (1 t = 9,8 kN) · b largo de plegado, t espesor, W abertura de la matriz, Rd radio de entrada de la matriz, Rp radio del punzón, todo en mm · Rm = 850 MPa (valor típico de Strenx® 700 E/F para este cálculo).</p>
   <div class="tool">
    <label>Largo de plegado b <output id="bv"></output><input type="range" id="br" min="200" max="3000" step="100" value="1000"></label>
    <label>Espesor t <output id="fv"></output><input type="range" id="fr" min="4" max="30" step="1" value="10"></label>
    <div class="blocks three" id="fres"></div>
-   <p class="note">La calculadora usa la abertura mínima W, Rd = t/2 y el punzón recomendado transversal. Es una estimación: el pico se asume a 120° de apertura, sin lubricación. Haz una prueba.</p>
+   <p class="note">La calculadora usa la abertura mínima recomendada W, Rd = t/2 y el radio inicial de punzón recomendado (plegado transversal). Es una estimación: el pico se asume a 120° de apertura, sin lubricación. Haz una prueba.</p>
   </div>`,
   ctx:'Mismo largo, mismas proporciones de herramienta.',
   q:'Si duplicas el espesor de la plancha, ¿qué pasa con la fuerza de plegado según la fórmula?',
   o:['Se duplica','Se multiplica por 4','No cambia'],c:1,
-  e:'La fuerza depende del espesor al cuadrado: 2² = 4. Si además la matriz crece con el espesor, el aumento real es menor, pero el orden de magnitud manda: pruébalo en la calculadora.'},
+  e:'En la fórmula, la fuerza depende del espesor al cuadrado: 2² = 4. Si además agrandas la matriz en proporción al espesor, la fuerza sube menos; pruébalo en la calculadora.'},
  {k:'learn',tag:'8 · Buenas prácticas',
   body:()=>`<h2>Las reglas que cuidan la pieza y a la gente</h2>
   <ul class="learn"><li><b>Nadie frente a la plegadora</b> cuando se pliega acero de alta resistencia.</li>
-  <li><b>No pliegues sobre el estampado</b> de identificación de la plancha: hay riesgo de fisura.</li>
-  <li><b>Sobre 20 mm</b>, si es posible, <b>baja la velocidad del punzón</b>: la deformación rápida calienta localmente el plegado.</li>
-  <li><b>Máquina estable</b> y herramienta bien fijada; lubricar el borde de la matriz o usar radios rotativos ayuda contra el deslizamiento a saltos (stick-slip).</li>
+  <li><b>No ubiques la línea de plegado sobre el estampado</b> de identificación de la plancha: hay riesgo de fisura.</li>
+  <li><b>Sobre 20 mm</b>, si es posible, <b>baja la velocidad del punzón</b>: una deformación rápida puede elevar localmente la temperatura en el plegado.</li>
+  <li><b>Máquina estable</b> y herramienta bien fijada; lubricar el borde de la matriz o usar un radio de entrada rotativo ayuda a evitar el deslizamiento a saltos (stick-slip) y baja la fuerza.</li>
   <li>Para la configuración exacta, SSAB ofrece <b>BendCalc</b>: retorno elástico, profundidad del punzón y fuerza máxima.</li></ul>`,
   ctx:'Plancha de 30 mm de Strenx® 700.',
   q:'¿Qué recomienda el folleto para este espesor?',
-  o:['Aumentar la velocidad del punzón para terminar rápido','Reducir la velocidad del punzón, si es posible','Plegar justo sobre el estampado para ocultarlo'],c:1,
+  o:['Aumentar la velocidad del punzón para terminar rápido','Reducir la velocidad del punzón, si es posible','Ubicar la línea de plegado sobre el estampado para ocultarlo'],c:1,
   e:'Sobre 20 mm, una deformación rápida puede elevar la temperatura localmente y afectar la plegabilidad. Bajar la velocidad reduce esa diferencia de temperatura.'},
  {k:'result'}
 ];
@@ -281,8 +281,8 @@ function tableTool(){
   const r=$('#tr'); r.value=S.t;
   const upd=()=>{S.t=+r.value; const t=S.t, R=row(t), d=S.dir;
     $('#tv').textContent=t+' mm';
-    $('#tres').innerHTML=`<div class="blk hi"><span>Radio interior mín. garantizado</span><b>${f1(R.ri[d]*t)} mm</b></div>
-      <div class="blk"><span>Radio de punzón recomendado</span><b>${f1(R.rp[d]*t)} mm</b></div>
+    $('#tres').innerHTML=`<div class="blk hi"><span>Radio interior final mín. garantizado</span><b>${f1(R.ri[d]*t)} mm</b></div>
+      <div class="blk"><span>Radio inicial de punzón recomendado</span><b>${f1(R.rp[d]*t)} mm</b></div>
       <div class="blk"><span>Abertura mínima de matriz</span><b>${f0(R.w*t)} mm</b></div>`;
     $('#trow').textContent=`Fila ${R.lab}: Ri/t ${f1(R.ri[d])} · Rp/t ${f1(R.rp[d])} · W/t ${R.w} · Radio de entrada de matriz ≥ ${f1(t/2)} mm (t/2).`;
     document.querySelectorAll('.tog button').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.d===d));};
