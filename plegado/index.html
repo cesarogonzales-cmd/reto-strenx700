@@ -313,20 +313,20 @@ function intro(){
 function result(){
   const sc=score(), rk=RANKS.find(r=>sc>=r[0])[1];
   const miss=QS.filter(i=>S.ans[i]!==P[i].c);
-  const txt=`Obtuve ${sc}/${QS.length} en el reto de plegado de Strenx® 700. Nivel: ${rk}.`;
+  const txt=`Obtuve ${sc}/${QS.length} en el reto de plegado de Strenx® 700. Nivel: ${rk}. ¿Quién supera mi puntaje?`;
   $('#count').textContent='Resultado';
   $('#view').innerHTML=`<div class="card">
     <div class="lvl" style="--c:var(--accent)"><b></b>Tu resultado</div>
     <div class="score">${sc}<small> / ${QS.length}</small></div>
     <div class="badge">${rk}</div>
     <p class="lede">Mejor racha: ${S.best} respuestas seguidas.</p>
-    <span class="streak">Compártelo en los comentarios del post:</span>
+    <span class="streak"><b>Último paso:</b> copia tu resultado y pégalo como comentario en el post de LinkedIn donde encontraste el reto.</span>
     <div class="share" id="sh">${esc(txt)}</div>
     <div class="row" style="justify-content:flex-start"><button class="btn" id="cp">Copiar mi resultado</button><button class="btn sec" id="rs">Intentar de nuevo</button></div>
     <span class="streak" id="cpok"></span>
     ${miss.length?`<h3>Para repasar</h3><div class="miss">${miss.map(i=>`<div><b>${P[i].q}</b><br>${P[i].e}</div>`).join('')}</div>`:'<p class="lede">Todo correcto. Así se pliega Strenx® 700: con método y a la primera.</p>'}
   </div>`;
-  $('#cp').onclick=async()=>{try{await navigator.clipboard.writeText(txt);$('#cpok').textContent='Copiado. Pégalo en los comentarios.';}catch(e){const r=document.createRange();r.selectNodeContents($('#sh'));const s=getSelection();s.removeAllRanges();s.addRange(r);$('#cpok').textContent='Texto seleccionado: cópialo.';}};
+  $('#cp').onclick=async()=>{try{await navigator.clipboard.writeText(txt);$('#cpok').textContent='Copiado ✓ Ahora vuelve al post y pégalo en los comentarios.';}catch(e){const r=document.createRange();r.selectNodeContents($('#sh'));const s=getSelection();s.removeAllRanges();s.addRange(r);$('#cpok').textContent='Texto seleccionado: cópialo.';}};
   $('#rs').onclick=()=>{S={i:0,ans:{},streak:0,best:0,dir:0,t:16,b:1000,ft:10};render();};
 }
 render();
